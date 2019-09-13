@@ -65,3 +65,7 @@ input:focus {
   height: 30px;
   font-size: 14px;
 }
+
+input:disabled {
+	background: #ccc;
+}
