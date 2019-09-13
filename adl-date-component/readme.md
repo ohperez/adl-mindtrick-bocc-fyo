@@ -19,8 +19,8 @@ Stencil components are just Web Components, so they work in any major framework 
 To start building a new web component using Stencil, clone this repo to a new directory:
 
 ```bash
-git clone https://github.com/ionic-team/stencil-component-starter.git my-component
-cd my-component
+git clone https://github.com/ionic-team/stencil-component-starter.git adl-date-component
+cd adl-date-component
 git remote rm origin
 ```
 
@@ -58,15 +58,15 @@ Instead, use a prefix that fits your company or any name for a group of related 
 ### Script tag
 
 - [Publish to NPM](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- Put a script tag similar to this `<script src='https://unpkg.com/my-component@0.0.1/dist/mycomponent.js'></script>` in the head of your index.html
+- Put a script tag similar to this `<script src='https://unpkg.com/adl-date-component@0.0.1/dist/mycomponent.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### Node Modules
-- Run `npm install my-component --save`
-- Put a script tag similar to this `<script src='node_modules/my-component/dist/mycomponent.js'></script>` in the head of your index.html
+- Run `npm install adl-date-component --save`
+- Put a script tag similar to this `<script src='node_modules/adl-date-component/dist/mycomponent.js'></script>` in the head of your index.html
 - Then you can use the element anywhere in your template, JSX, html etc
 
 ### In a stencil-starter app
-- Run `npm install my-component --save`
-- Add an import to the npm packages `import my-component;`
+- Run `npm install adl-date-component --save`
+- Add an import to the npm packages `import adl-date-component;`
 - Then you can use the element anywhere in your template, JSX, html etc

@@ -1,17 +1,21 @@
 import { Component, Prop, h } from '@stencil/core';
+import moment from 'moment';
 
 @Component({
-  tag: 'my-component',
-  styleUrl: 'my-component.css',
+  tag: 'adl-date-component',
+  styleUrl: 'adl-date-component.css',
   shadow: true
 })
-export class MyComponent {
+export class AdlDateComponent {
 
   @Prop() year: string;
   @Prop() month: string;
   @Prop() day: string;
 
   render() {
+		let date = moment().format();
+		console.log(date);
+
     return (
       <div>
         <input type="text" id="year"/>

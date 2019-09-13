@@ -9,7 +9,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
+  interface AdlDateComponent {
     'day': string;
     'month': string;
     'year': string;
@@ -19,25 +19,25 @@ export namespace Components {
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLAdlDateComponentElement extends Components.AdlDateComponent, HTMLStencilElement {}
+  var HTMLAdlDateComponentElement: {
+    prototype: HTMLAdlDateComponentElement;
+    new (): HTMLAdlDateComponentElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'adl-date-component': HTMLAdlDateComponentElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
+  interface AdlDateComponent extends JSXBase.HTMLAttributes<HTMLAdlDateComponentElement> {
     'day'?: string;
     'month'?: string;
     'year'?: string;
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'adl-date-component': AdlDateComponent;
   }
 }
 

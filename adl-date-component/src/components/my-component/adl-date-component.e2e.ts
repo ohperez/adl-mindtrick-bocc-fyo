@@ -1,20 +1,20 @@
 import { newE2EPage } from '@stencil/core/testing';
-
-describe('my-component', () => {
+/*
+describe('adl-date-component', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<my-component></my-component>');
-    const element = await page.find('my-component');
+    await page.setContent('<adl-date-component></adl-date-component>');
+    const element = await page.find('adl-date-component');
     expect(element).toHaveClass('hydrated');
   });
-
+	
   it('renders changes to the name data', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<my-component></my-component>');
-    const component = await page.find('my-component');
-    const element = await page.find('my-component >>> div');
+    await page.setContent('<adl-date-component></adl-date-component>');
+    const component = await page.find('adl-date-component');
+    const element = await page.find('adl-date-component >>> div');
     expect(element.textContent).toEqual(`Hello, World! I'm `);
 
     component.setProperty('first', 'James');
@@ -28,5 +28,7 @@ describe('my-component', () => {
     component.setProperty('middle', 'Earl');
     await page.waitForChanges();
     expect(element.textContent).toEqual(`Hello, World! I'm James Earl Quincy`);
-  });
+	});
+	
 });
+*/
