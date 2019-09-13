@@ -42,7 +42,6 @@ export class AdlDateComponent {
   componentWillLoad() {
     this.setYears();
     this.setDays();
-    this.setFirstDayInWeek();
   }
 
   setYears() {
@@ -52,6 +51,7 @@ export class AdlDateComponent {
   }
 
   setDays() {
+    this.setFirstDayInWeek();
     let daysInMonth = moment('2019-10').daysInMonth();
     for (let i = 1; i <= daysInMonth; i++) {
       this.daysList.push(i);
@@ -59,10 +59,14 @@ export class AdlDateComponent {
     console.log(this.daysList);
   }
 
-  setFirstDayInWeek(){
-    this.firstDayInWeek = moment('2019-09-02').day();
+  setFirstDayInWeek() {
+    this.firstDayInWeek = moment('2019-09-05').day();
     this.firstDayInWeek === 0 ? this.firstDayInWeek = 7 : this.firstDayInWeek = this.firstDayInWeek;
     console.log(this.firstDayInWeek);
+    for (let i = 1; i < this.firstDayInWeek; i++) {
+      this.daysList.push('');
+    }
+    console.log(this.daysList);
   }
 
   handleKey(evt: KeyboardEvent, dtType: number) {

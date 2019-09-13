@@ -52,7 +52,6 @@ input:focus {
 
 .grid-container {
   height: 84%;
-  flex-wrap: wrap;
   overflow-y: scroll;
   overflow-x: hidden;
   display: grid;
