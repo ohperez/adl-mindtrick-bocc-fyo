@@ -69,3 +69,25 @@ input:focus {
 input:disabled {
 	background: #ccc;
 }
+
+.grid-element-year:hover {
+	font-weight: bold;
+	color: green;
+	zoom: 1.2;
+}
+
+.popup-container{
+	display: none;
+}
+
+.years-container, .months-container , .day-container {
+	display: none;
+}
+
+.show{
+	display: block;
+}
+
+.hide{
+	display: none;
+}
