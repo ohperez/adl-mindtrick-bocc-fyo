@@ -52,17 +52,16 @@ input:focus {
 
 .grid-container {
   height: 84%;
-  flex-wrap: wrap;
   overflow-y: scroll;
   overflow-x: hidden;
   display: grid;
 }
 
-.year-columns {
+.years-columns {
   grid-template-columns: repeat(auto-fill, minmax(calc(100%/6), 1fr));
 }
 
-.month-columns {
+.months-columns {
   grid-template-columns: repeat(auto-fill, minmax(calc(100%/3), 1fr));
 }
 
@@ -103,14 +102,14 @@ input:disabled {
 	display: none;
 }
 
-.years-container, .months-container , .day-container {
+.years-columns, .months-columns , .days-columns {
 	display: none;
 }
 
-.show{
+.show-calendar{
+	display: grid;
+}
+
+.show-popup{
 	display: block;
-}
-
-.hide{
-	display: none;
 }
