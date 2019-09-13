@@ -1,6 +1,13 @@
 import { Component, Prop, h } from '@stencil/core';
-import { getElementFromEvt, validateYear, validateMonth, validateDay, disableInputs, setValueFromEvt} from '../../utils/utils';
 import moment from 'moment';
+import { 
+	getElementFromEvt,
+	validateYear,
+	validateMonth,
+	validateDay, 
+	disableInputs,
+	setValueFromEvt
+} from '../../utils/utils';
 
 @Component({
   tag: 'adl-date-component',
