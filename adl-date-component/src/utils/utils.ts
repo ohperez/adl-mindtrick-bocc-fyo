@@ -25,7 +25,7 @@ export function validateDay(year,month,day): boolean {
 	return validateDate(year,month,day);
 }
 
-export function disableInputs(cmptEl: HTMLElement, year: number,month: number, day: number) {
+export function disableInputs(cmptEl: HTMLElement, year: string,month: string, day: string) {
 	let inputDay = cmptEl.shadowRoot.querySelector('[dtType="day"]');
 	let inputMoth = cmptEl.shadowRoot.querySelector('[dtType="month"]');
 	let inputYear = cmptEl.shadowRoot.querySelector('[dtType="year"]');
@@ -43,6 +43,40 @@ export function disableInputs(cmptEl: HTMLElement, year: number,month: number, d
 	}
 }
 
+export function clearOnValidate(cmptEl: HTMLElement, year: string,month: string, day: string) {
+	let inputs = [];
+	inputs[0] = cmptEl.shadowRoot.querySelector('[dtType="year"]');
+	inputs[1] = cmptEl.shadowRoot.querySelector('[dtType="month"]');
+	inputs[2] = cmptEl.shadowRoot.querySelector('[dtType="day"]');
+
+	if(month < 10 && month > 0) {
+		month = '0' + month;
+	}
+
+	if(day < 10 && day > 0) {
+		day = '0' + day;
+	}
+
+	let date = `${year}-${month}-${day}`;
+	let odate = moment(date, 'YYYY-MM-DD', true);
+	let invalidAt = odate.invalidAt();
+	//console.log(date, invalidAt);
+
+	if(invalidAt > 0) {
+		for (let i = invalidAt; i <= inputs.length; i++) {
+			if(inputs[i]){
+				inputs[i].value = null;
+				disableInputs(cmptEl, year, month, day);
+			}
+		}
+
+		if(invalidAt === 2){
+			inputs[2].value = null;
+		}
+	} 
+
+}
+
 export function setValueFromEvt(el, dtType, year, month, day){
 	if(dtType === 3) {
 		year = el.value;
@@ -55,7 +89,7 @@ export function setValueFromEvt(el, dtType, year, month, day){
 	return { year: year, month: month, day: day }
 }
 
-function validateDate(year,month,day){
+export function validateDate(year,month,day){
 	let date = `${year}-${month}-${day}`;
 	return moment(date).isValid();
 }
