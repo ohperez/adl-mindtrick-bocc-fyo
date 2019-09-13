@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-/*
+
 describe('adl-date-component', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -8,6 +8,8 @@ describe('adl-date-component', () => {
     const element = await page.find('adl-date-component');
     expect(element).toHaveClass('hydrated');
   });
+
+	/*
 	
   it('renders changes to the name data', async () => {
     const page = await newE2EPage();
@@ -29,6 +31,6 @@ describe('adl-date-component', () => {
     await page.waitForChanges();
     expect(element.textContent).toEqual(`Hello, World! I'm James Earl Quincy`);
 	});
+	*/
 	
 });
-*/
