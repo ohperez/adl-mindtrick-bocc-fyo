@@ -5,7 +5,9 @@ import {
 	disableInputs,
 	setValueFromEvt,
 	clearOnValidate,
-	validateDate
+	validateDate,
+	getPopupDate,
+	togglePopups
 } from '../../utils/utils';
 
 @Component({
@@ -26,18 +28,18 @@ export class AdlDateComponent {
   private yearsList = [];
 
   private monthsList = [
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre'
+    { key: 1, value: 'Enero' },
+    { key: 2, value: 'Febrero' },
+    { key: 3, value: 'Marzo' },
+    { key: 4, value: 'Abril' },
+    { key: 5, value: 'Mayo' },
+    { key: 6, value: 'Junio' },
+    { key: 7, value: 'Julio' },
+    { key: 8, value: 'Agosto' },
+    { key: 9, value: 'Septiembre' },
+    { key: 10, value: 'Octubre' },
+    { key: 11, value: 'Noviembre' },
+    { key: 12, value: 'Diciembre' }
   ];
 	
   private daysList = [];
@@ -112,27 +114,16 @@ export class AdlDateComponent {
 	}
 
 	showPopup(evt: Event, dtType: number){
-		console.log(dtType)
 		let popup = this.cmptEl.shadowRoot.querySelector('.popup-container');
-		let popupYear = this.cmptEl.shadowRoot.querySelector('.years-container');
-		let popupMonth = this.cmptEl.shadowRoot.querySelector('.months-container');
-		let popupDay = this.cmptEl.shadowRoot.querySelector('.days-container');
-		
-		if(dtType === 3){
-			popupYear.classList.add('show');
-			popupMonth.classList.remove('show');
-			popupDay.classList.remove('show');
-		} else if(dtType === 2){
-			popupYear.classList.remove('show');
-			popupMonth.classList.add('show');
-			popupDay.classList.remove('show');
-		} else if(dtType === 1){
-			popupYear.classList.remove('show');
-			popupMonth.classList.remove('show');
-			popupDay.classList.add('show');
-		}
+		let popupYear = this.cmptEl.shadowRoot.querySelector('.years-columns');
+		let popupMonth = this.cmptEl.shadowRoot.querySelector('.months-columns');
+		let popupDay = this.cmptEl.shadowRoot.querySelector('.days-columns');
+		let popups = [popupYear, popupMonth, popupDay];
+		let title = getPopupDate(dtType);
 
-		popup.classList.add('show');
+		togglePopups(popups, dtType);
+
+		popup.classList.add('show-popup');
 	}
 
   renderList(item, customClass) {
@@ -185,12 +176,28 @@ export class AdlDateComponent {
 
         <div class="popup-container">
           <div class="calendar-container">
-            <p class="grid-title">Selecciona el día</p>
-            <div></div>
+            <p class="grid-title">Selecciona el año</p>
+
             <div class="grid-container days-columns">
               {
                 this.daysList.map(item => {
-                  return this.renderList(item, ' day-item');
+                  return this.renderList(item, ' year-item');
+                })
+              }
+            </div>
+
+						<div class="grid-container months-columns">
+              {
+                this.monthsList.map(item => {
+                  return this.renderList(item, ' month-item');
+                })
+              }
+            </div>
+
+						<div class="grid-container years-columns">
+              {
+                this.yearsList.map(item => {
+                  return this.renderList(item, ' year-item');
                 })
               }
             </div>
@@ -200,30 +207,3 @@ export class AdlDateComponent {
     );
   }
 }
-
-{/* <div class="popup-container">
-          <div class="calendar-container">
-            <p class="grid-title">Selecciona el año</p>
-            <div class="grid-container year-columns">
-              {
-                this.yearsList.map(item => {
-                  console.log(item);
-                  return this.renderList(item, ' year-item');
-                })
-              }
-            </div>
-          </div>
-        </div> */}
-
-        // <div class="popup-container">
-        //   <div class="calendar-container">
-        //     <p class="grid-title">Selecciona el mes</p>
-        //     <div class="grid-container month-columns">
-        //       {
-        //         this.monthsList.map(item => {
-        //           return this.renderList(item, '');
-        //         })
-        //       }
-        //     </div>
-        //   </div>
-        // </div>

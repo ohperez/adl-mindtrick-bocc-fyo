@@ -60,7 +60,6 @@ export function clearOnValidate(cmptEl: HTMLElement, year: string,month: string,
 	let date = `${year}-${month}-${day}`;
 	let odate = moment(date, 'YYYY-MM-DD', true);
 	let invalidAt = odate.invalidAt();
-	//console.log(date, invalidAt);
 
 	if(invalidAt > 0) {
 		for (let i = invalidAt; i <= inputs.length; i++) {
@@ -92,4 +91,33 @@ export function setValueFromEvt(el, dtType, year, month, day){
 export function validateDate(year,month,day){
 	let date = `${year}-${month}-${day}`;
 	return moment(date).isValid();
+}
+
+export function getPopupDate(dtType: number): string{
+	let title = 'Selecciona el ';
+	if(dtType === 3){
+		return `${title} año`;
+	} else if(dtType === 2){
+		return `${title} mes`;
+	} else if(dtType === 1){
+		return `${title} día`;
+	}
+}
+
+export function togglePopups(popups, dtType: number): string{
+	let showClass = 'show-calendar';
+
+	if(dtType === 3){
+		popups[0].classList.add(showClass);
+		popups[1].classList.remove(showClass);
+		popups[2].classList.remove(showClass);
+	} else if(dtType === 2){
+		popups[0].classList.remove(showClass);
+		popups[1].classList.add(showClass);
+		popups[2].classList.remove(showClass);
+	} else if(dtType === 1){
+		popups[0].classList.remove(showClass);
+		popups[1].classList.remove(showClass);
+		popups[2].classList.add(showClass);
+	}
 }
