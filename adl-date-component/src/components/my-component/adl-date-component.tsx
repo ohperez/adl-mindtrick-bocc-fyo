@@ -12,15 +12,54 @@ export class AdlDateComponent {
   @Prop() month: string;
   @Prop() day: string;
 
-  render() {
-		let date = moment().format();
-		console.log(date);
+  public yearsList = [];
+
+
+  renderList(item) {
+    return (
+      <div class="grid-element-year">
+        <span>{item}</span>
+      </div>
+    );
+  }
+
+  componentWillLoad() {
+    for (let i = 1900; i < 2019; i++) {
+    this.yearsList.push(i);
+   }
+  }
+
+  render2() {
+    let date = moment().format();
+    console.log(date);
+
+
+
 
     return (
-      <div>
-        <input type="text" id="year"/>
-        <input type="text" id="month"/>
-        <input type="text" id="day"/>
+      <div class="adl-datepicker">
+        <div class="input-container">
+          <input type="tel" id="year" class="year-input" maxlength="4" />
+          <span>/</span>
+          <input type="tel" id="month" maxlength="2" />
+          <span>/</span>
+          <input type="tel" id="day" maxlength="2" />
+        </div>
+        <div class="popup-container">
+          <div class="years-container">
+            <p class="grid-title">
+              Seleccione el año
+            </p>
+            <div class="grid-container">
+              {
+                this.yearsList.map(item => {
+                  console.log(item);
+                  return this.renderList(item);
+                })
+              }
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
