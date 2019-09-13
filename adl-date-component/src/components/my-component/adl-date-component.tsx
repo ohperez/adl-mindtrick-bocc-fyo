@@ -17,6 +17,14 @@ export class AdlDateComponent {
 
 	private month: number;
 	private day: number;
+	private yearsList = [];
+
+	componentWillLoad() {
+    for (let i = 1900; i < 2019; i++) {
+    this.yearsList.push(i);
+   }
+  }
+
 	handleKey(evt: KeyboardEvent, dtType: number){
 
 		let el = getElementFromEvt(evt);
@@ -37,65 +45,53 @@ export class AdlDateComponent {
 		console.log(date, odate.invalidAt());
 
 		this.value = date;
-	
+
 	}
-  public yearsList = [];
-  render() {
 
-
-  renderList(item) {
+	renderList(item) {
     return (
       <div class="grid-element-year">
         <span>{item}</span>
-      <div>
-        <input 
-					type="tel"
-					value={this.year}
-					onkeyup={($evt) => this.handleKey($evt,3)}
-					dtType="year"
-				/>
-
-        <input
-					type="tel"
-					value={this.month}
-					onkeyup={($evt) => this.handleKey($evt,2)}
-					dtType="month"
-					disabled
-				/>
-
-        <input
-					type="tel"
-					value={this.day}
-					onkeyup={($evt) => this.handleKey($evt,1)}
-					dtType="day"
-					disabled
-				/>
-
       </div>
-    );
+		);
   }
 
-  componentWillLoad() {
-    for (let i = 1900; i < 2019; i++) {
-    this.yearsList.push(i);
-   }
-  }
-
-  render2() {
-    let date = moment().format();
-    console.log(date);
-
-
-
+  render() {
 
     return (
       <div class="adl-datepicker">
         <div class="input-container">
-          <input type="tel" id="year" class="year-input" maxlength="4" />
+				
+					<input 
+						type="tel"
+						class="year-input"
+						value={this.year}
+						onkeyup={($evt) => this.handleKey($evt,3)}
+						maxlength="4"
+						dtType="year"
+					/>
           <span>/</span>
-          <input type="tel" id="month" maxlength="2" />
+
+					<input
+						type="tel"
+						value={this.month}
+						onkeyup={($evt) => this.handleKey($evt,2)}
+						dtType="month"
+						maxlength="2"
+						disabled
+					/>
+          
           <span>/</span>
-          <input type="tel" id="day" maxlength="2" />
+
+					<input
+						type="tel"
+						value={this.day}
+						onkeyup={($evt) => this.handleKey($evt,1)}
+						dtType="day"
+						maxlength="2"
+						disabled
+					/>
+
         </div>
         <div class="popup-container">
           <div class="years-container">
