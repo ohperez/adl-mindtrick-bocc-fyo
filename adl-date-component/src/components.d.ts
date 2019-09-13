@@ -9,53 +9,35 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
+  interface AdlDateComponent {
+    'day': string;
+    'month': string;
+    'year': string;
   }
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLAdlDateComponentElement extends Components.AdlDateComponent, HTMLStencilElement {}
+  var HTMLAdlDateComponentElement: {
+    prototype: HTMLAdlDateComponentElement;
+    new (): HTMLAdlDateComponentElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'adl-date-component': HTMLAdlDateComponentElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
+  interface AdlDateComponent extends JSXBase.HTMLAttributes<HTMLAdlDateComponentElement> {
+    'day'?: string;
+    'month'?: string;
+    'year'?: string;
   }
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'adl-date-component': AdlDateComponent;
   }
 }
 

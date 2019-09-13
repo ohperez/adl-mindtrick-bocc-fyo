@@ -1,4 +1,4 @@
-# my-component
+# adl-date-component
 
 
 
