@@ -15,32 +15,59 @@ import {
 })
 export class AdlDateComponent {
 
-	@Element() cmptEl: HTMLElement;
+  @Element() cmptEl: HTMLElement;
 
-	@Prop({ reflect: true }) value: string;
-	@Prop() format: string;
-	private year: number;
+  @Prop({ reflect: true }) value: string;
+  @Prop() format: string;
+  private year: number;
 
-	private month: number;
-	private day: number;
-	private yearsList = [];
+  private month: number;
+  private day: number;
+  private yearsList = [];
+
+  private monthsList = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+  ];
+	
+  private daysList = [];
+  private firstDayInWeek: number;
 
 	public inputYear = null;
 	public inputMonth = null;
 	public inputDay = null;
 
-	componentWillLoad() {
+  componentWillLoad() {
+    this.setYears();
+    this.setDays();
+    this.setFirstDayInWeek();
+  }
+
+  setYears() {
     for (let i = 1900; i < 2019; i++) {
 			this.yearsList.push(i);
 		}
-
-		this.inputYear = this.cmptEl.shadowRoot.querySelector('[dtType="year"]');
-		this.inputMonth = this.cmptEl.shadowRoot.querySelector('[dtType="month"]');
-		this.inputDay = this.cmptEl.shadowRoot.querySelector('[dtType="day"]');
+  }
+  
+  setDays() {
+    let daysInMonth = moment('2019-10').daysInMonth();
+    for (let i = 1; i <= daysInMonth; i++) {
+      this.daysList.push(i);
+    }
+    console.log(this.daysList);
   }
 
-	handleKey(evt: KeyboardEvent, dtType: number){
-
+	handleKey(evt: KeyboardEvent, dtType: number) {
 		let el = getElementFromEvt(evt);
 		let value = null;
 		
@@ -61,6 +88,12 @@ export class AdlDateComponent {
 			console.log(odate.format(this.format));
 		}
 	}
+
+  setFirstDayInWeek(){
+    this.firstDayInWeek = moment('2019-09-02').day();
+    this.firstDayInWeek === 0 ? this.firstDayInWeek = 7 : this.firstDayInWeek = this.firstDayInWeek;
+    console.log(this.firstDayInWeek);
+  }
 
 	onYearClick(clickYear: number){
 		this.inputYear = this.cmptEl.shadowRoot.querySelector('[dtType="year"]');
@@ -102,12 +135,12 @@ export class AdlDateComponent {
 		popup.classList.add('show');
 	}
 
-	renderList(item) {
+  renderList(item, customClass) {
     return (
-      <div onClick={() => this.onYearClick(item)} class="grid-element-year">
+      <div onClick={() => this.onYearClick(item)} class={"grid-item" + (customClass)}>
         <span>{item}</span>
       </div>
-		);
+    );
   }
 
   render() {
@@ -148,24 +181,49 @@ export class AdlDateComponent {
 						maxlength="2"
 						disabled
 					/>
-
         </div>
+
         <div class="popup-container">
-          <div class="years-container">
-            <p class="grid-title">
-              Seleccione el año
-            </p>
-            <div class="grid-container">
+          <div class="calendar-container">
+            <p class="grid-title">Selecciona el día</p>
+            <div></div>
+            <div class="grid-container days-columns">
               {
-                this.yearsList.map(item => {
-                  return this.renderList(item);
+                this.daysList.map(item => {
+                  return this.renderList(item, ' day-item');
                 })
               }
             </div>
           </div>
         </div>
-      </div>
+			</div>
     );
   }
 }
 
+{/* <div class="popup-container">
+          <div class="calendar-container">
+            <p class="grid-title">Selecciona el año</p>
+            <div class="grid-container year-columns">
+              {
+                this.yearsList.map(item => {
+                  console.log(item);
+                  return this.renderList(item, ' year-item');
+                })
+              }
+            </div>
+          </div>
+        </div> */}
+
+        // <div class="popup-container">
+        //   <div class="calendar-container">
+        //     <p class="grid-title">Selecciona el mes</p>
+        //     <div class="grid-container month-columns">
+        //       {
+        //         this.monthsList.map(item => {
+        //           return this.renderList(item, '');
+        //         })
+        //       }
+        //     </div>
+        //   </div>
+        // </div>
