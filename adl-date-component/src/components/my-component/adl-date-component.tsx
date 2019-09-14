@@ -153,7 +153,7 @@ export class AdlDateComponent {
 		this.inputDay = this.cmptEl.shadowRoot.querySelector('[dtType="day"]');
 		this.month = clickMonth.key;
 		this.inputMonth.value = clickMonth.key;
-		
+
 		disableInputs(this.cmptEl, this.year, this.month, this.day);
 		this.inputDay.focus();
 
@@ -172,7 +172,7 @@ export class AdlDateComponent {
 		this.inputDay = this.cmptEl.shadowRoot.querySelector('[dtType="day"]');
 		this.day = clickDay;
 		this.inputDay.value = clickDay;
-		
+
 		disableInputs(this.cmptEl, this.year, this.month, this.day);
 		this.inputDay.focus();
 
@@ -205,7 +205,7 @@ export class AdlDateComponent {
 		popup.classList.add('show-popup');
 	}
 
-  renderYearsList(item, customClass) {
+  renderYearsList(item) {
     return (
       <div onClick={() => this.onYearClick(item)} class="grid-item year-item">
         <span>{item}</span>
@@ -213,7 +213,7 @@ export class AdlDateComponent {
     );
   }
 
-	renderMonthsList(item, customClass) {
+	renderMonthsList(item) {
     return (
       <div onClick={() => this.onMonthClick(item)} class="grid-item month-item">
         <span>{item.value}</span>
@@ -221,9 +221,17 @@ export class AdlDateComponent {
     );
   }
 
-	renderDaysList(item, customClass) {
+	renderDaysList(item) {
     return (
       <div onClick={() => this.onDayClick(item)} class="grid-item day-item">
+        <span>{item}</span>
+      </div>
+    );
+  }
+
+	renderDaysHeaders(item) {
+    return (
+      <div class="grid-item day-header">
         <span>{item}</span>
       </div>
     );
@@ -279,7 +287,7 @@ export class AdlDateComponent {
             <div class="grid-container days-columns show-calendar">
               {
                 this.daysWeekList.map(item => {
-                  return this.renderYearsList(item);
+                  return this.renderDaysHeaders(item);
                 })
               }
               {

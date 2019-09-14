@@ -1,3 +1,7 @@
+:root {
+  font-family: var(--font-family), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
 input {
   width: 30%;
   text-align: center;
@@ -91,11 +95,18 @@ input:focus {
 }
 
 .month-item {
-  height: 30px;
+  height: auto;
 }
 
 .day-item {
-  height: 30px;
+  height: auto;
+}
+
+.day-header{
+  font-weight: bold;
+  font-size: calc(var(--calendar-font-size) - 0.125rem);
+  pointer-events: none;
+  padding-bottom: 10px;
 }
 
 input:disabled {
