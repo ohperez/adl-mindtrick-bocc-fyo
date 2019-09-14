@@ -75,6 +75,24 @@ input:focus {
   grid-template-columns: repeat(auto-fill, minmax(calc(100% / var(--quantity-year-columns)), 1fr));
 }
 
+@media (min-width: 560px) {
+  .years-columns {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100% / (var(--quantity-year-columns) + 1)), 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .years-columns {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100% / (var(--quantity-year-columns) + 2)), 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .years-columns {
+    grid-template-columns: repeat(auto-fill, minmax(calc(100% / (var(--quantity-year-columns) + 3)), 1fr));
+  }
+}
+
 .months-columns {
   grid-template-columns: repeat(auto-fill, minmax(calc(100% /3), 1fr));
 }
