@@ -279,7 +279,7 @@ export class AdlDateComponent {
             <div class="grid-container days-columns show-calendar">
               {
                 this.daysWeekList.map(item => {
-                  return this.renderList(item, ' day-item');
+                  return this.renderYearsList(item);
                 })
               }
               {
