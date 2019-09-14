@@ -214,7 +214,7 @@ export class AdlDateComponent {
 		popup.classList.remove('show-popup');
 		this.setYears();
     this.setDays();
-		console.log('on render');
+
 		this.render();
 		this.cmptEl.forceUpdate();
 		popup.classList.add('show-popup');
