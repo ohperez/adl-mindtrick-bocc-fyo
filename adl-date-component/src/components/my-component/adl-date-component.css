@@ -3,11 +3,21 @@ input {
   text-align: center;
   border: none;
   border-radius: 3px;
+  font-size: var(--input-font-size);
+  padding: var(--input-padding) 0;
 }
 
 input:focus {
   outline: none;
-  box-shadow: inset 0 0 1px 2px #0000ff78;
+  box-shadow: inset 0 0 1px 2px var(--primary-color);
+}
+
+::placeholder {
+  opacity: 0.5;
+}
+
+.field-separator {
+  padding: var(--input-padding) 0;
 }
 
 .adl-datepicker {
@@ -18,9 +28,9 @@ input:focus {
   display: flex;
   justify-content: space-between;
   position: relative;
-  border: 1px solid #7d7d7d;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  padding: 1px;
+  padding: var(--input-container-padding);
 }
 
 .popup-container {
@@ -32,7 +42,7 @@ input:focus {
   width: calc(100% - 8px);
   height: 250px;
   border-radius: 3px;
-  border: 1px solid #7d7d7d;
+  border: 1px solid var(--border-color);
   background-color: #ffffff;
   overflow: auto;
 }
@@ -44,7 +54,7 @@ input:focus {
 }
 
 .grid-title {
-  font-size: 0.75rem;
+  font-size: var(--input-font-size);
   text-align: center;
   margin: 0;
   padding: 10px 0;
@@ -58,11 +68,11 @@ input:focus {
 }
 
 .years-columns {
-  grid-template-columns: repeat(auto-fill, minmax(calc(100%/6), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(calc(100% / var(--quantity-year-columns)), 1fr));
 }
 
 .months-columns {
-  grid-template-columns: repeat(auto-fill, minmax(calc(100%/3), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(calc(100% /3), 1fr));
 }
 
 .days-columns {
@@ -72,8 +82,8 @@ input:focus {
 .grid-item {
   justify-self: center;
   align-self: center;
-  height: 30px;
-  font-size: 14px;
+  font-size: var(--calendar-font-size);
+  color: var(--calendar-font-color);
 }
 
 .year-item {
@@ -89,27 +99,30 @@ input:focus {
 }
 
 input:disabled {
-  background: #ccc;
+  background: var(--disable-color);
 }
 
-.grid-element-year:hover {
-	font-weight: bold;
-	color: green;
-	zoom: 1.2;
+.grid-item:hover {
+  font-weight: bold;
+  color: var(--primary-color);
+  cursor: default;
+  font-size: calc(var(--calendar-font-size) + 0.25rem);
 }
 
-.popup-container{
-	display: none;
+.popup-container {
+  display: none;
 }
 
-.years-columns, .months-columns , .days-columns {
-	display: none;
+.years-columns,
+.months-columns,
+.days-columns {
+  display: none;
 }
 
-.show-calendar{
-	display: grid;
+.show-calendar {
+  display: grid;
 }
 
-.show-popup{
-	display: block;
+.show-popup {
+  display: block;
 }

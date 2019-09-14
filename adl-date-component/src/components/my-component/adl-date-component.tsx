@@ -1,6 +1,6 @@
 import { Component, Prop, h } from '@stencil/core';
 import moment from 'moment';
-import { 
+import {
 	getElementFromEvt,
 	disableInputs,
 	setValueFromEvt,
@@ -41,7 +41,9 @@ export class AdlDateComponent {
     { key: 11, value: 'Noviembre' },
     { key: 12, value: 'Diciembre' }
   ];
-	
+
+  private daysWeekList = ['L','M','M','J','V','S','D'];
+
   private daysList = [];
   private firstDayInWeek: number;
 
@@ -59,7 +61,7 @@ export class AdlDateComponent {
 			this.yearsList.push(i);
 		}
   }
-  
+
   setDays() {
     this.setFirstDayInWeek();
     let daysInMonth = moment('2019-10').daysInMonth();
@@ -72,7 +74,7 @@ export class AdlDateComponent {
 	handleKey(evt: KeyboardEvent, dtType: number) {
 		let el = getElementFromEvt(evt);
 		let value = null;
-		
+
 		let { year, month, day } = setValueFromEvt(
 				el, dtType, this.year, this.month, this.day
 		)
@@ -83,14 +85,14 @@ export class AdlDateComponent {
 		this.year = year;
 		this.month = month;
 		this.day = day;
-		
+
 		if(validateDate(this.year,this.month,this.date)){
 			let date = `${this.year}-${this.month}-${this.day}`;
 			let odate = moment(date);
 			console.log(odate.format(this.format));
 		}
 	}
-	
+
   setFirstDayInWeek() {
     this.firstDayInWeek = moment('2019-09-05').day();
     this.firstDayInWeek === 0 ? this.firstDayInWeek = 7 : this.firstDayInWeek = this.firstDayInWeek;
@@ -106,7 +108,7 @@ export class AdlDateComponent {
 		this.inputMonth = this.cmptEl.shadowRoot.querySelector('[dtType="month"]');
 		this.year = clickYear;
 		this.inputYear.value = clickYear;
-		
+
 		disableInputs(this.cmptEl, this.year, this.month, this.day);
 		this.inputMonth.focus();
 
@@ -143,17 +145,18 @@ export class AdlDateComponent {
     return (
       <div class="adl-datepicker">
         <div class="input-container">
-				
-					<input 
+
+					<input
 						type="tel"
 						class="year-input"
 						value={this.year}
 						onkeyup={($evt) => this.handleKey($evt,3)}
 						onfocus={($evt) => this.showPopup($evt,3)}
 						maxlength="4"
-						dtType="year"
+            dtType="year"
+            placeholder="1998"
 					/>
-          <span>/</span>
+          <span class="field-separator">/</span>
 
 					<input
 						type="tel"
@@ -161,11 +164,12 @@ export class AdlDateComponent {
 						onkeyup={($evt) => this.handleKey($evt,2)}
 						onfocus={($evt) => this.showPopup($evt,2)}
 						dtType="month"
-						maxlength="2"
+            maxlength="2"
+            placeholder="03"
 						disabled
 					/>
-          
-          <span>/</span>
+
+          <span class="field-separator">/</span>
 
 					<input
 						type="tel"
@@ -173,7 +177,8 @@ export class AdlDateComponent {
 						onkeyup={($evt) => this.handleKey($evt,1)}
 						onfocus={($evt) => this.showPopup($evt,1)}
 						dtType="day"
-						maxlength="2"
+            maxlength="2"
+            placeholder="16"
 						disabled
 					/>
         </div>
@@ -182,10 +187,15 @@ export class AdlDateComponent {
           <div class="calendar-container">
             <p class="grid-title">Selecciona el año</p>
 
-            <div class="grid-container days-columns">
+            <div class="grid-container days-columns show-calendar">
+              {
+                this.daysWeekList.map(item => {
+                  return this.renderList(item, ' day-item');
+                })
+              }
               {
                 this.daysList.map(item => {
-                  return this.renderList(item, ' year-item');
+                  return this.renderList(item, ' day-item');
                 })
               }
             </div>
