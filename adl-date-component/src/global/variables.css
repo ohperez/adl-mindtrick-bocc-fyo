@@ -1,0 +1,11 @@
+:root {
+  --primary-color: #488aff;
+  --disable-color: #ccc;
+  --border-color: #ddd;
+  --input-font-size: 0.875rem;
+  --input-padding: 7px;
+  --input-container-padding: 5px;
+  --calendar-font-size: 1rem;
+  --calendar-font-color: #022047;
+  --quantity-year-columns: 8;
+}
