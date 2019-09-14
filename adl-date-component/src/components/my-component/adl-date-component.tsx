@@ -55,18 +55,32 @@ export class AdlDateComponent {
   }
 
   setYears() {
-    for (let i = 1900; i < 2019; i++) {
+		this.yearsList = [];
+    for (let i = 2030; i >= 1940; i--) {
 			this.yearsList.push(i);
 		}
   }
   
   setDays() {
+		this.daysList = [];
     this.setFirstDayInWeek();
-    let daysInMonth = moment('2019-10').daysInMonth();
+
+		let year = this.year;
+		let month = this.month;
+		let day = this.day;
+
+		if(!this.year){
+			year = moment().year();
+		}
+
+		if(!this.month){
+			month = moment().month();
+		}
+
+    let daysInMonth = moment(`${year}-${month}`).daysInMonth();
     for (let i = 1; i <= daysInMonth; i++) {
       this.daysList.push(i);
     }
-    console.log(this.daysList);
   }
 
 	handleKey(evt: KeyboardEvent, dtType: number) {
@@ -92,13 +106,24 @@ export class AdlDateComponent {
 	}
 	
   setFirstDayInWeek() {
-    this.firstDayInWeek = moment('2019-09-05').day();
+		let year = this.year;
+		let month = this.month;
+
+		if(!this.year){
+			year = moment().year();
+		}
+
+		if(!this.month){
+			month = moment().month();
+		}
+
+    this.firstDayInWeek = moment(`${year}-${month}-01`).day();
     this.firstDayInWeek === 0 ? this.firstDayInWeek = 7 : this.firstDayInWeek = this.firstDayInWeek;
-    console.log(this.firstDayInWeek);
+    // console.log(this.firstDayInWeek);
     for (let i = 1; i < this.firstDayInWeek; i++) {
       this.daysList.push('');
     }
-    console.log(this.daysList);
+    // console.log(this.daysList);
   }
 
 	onYearClick(clickYear: number){
@@ -108,31 +133,95 @@ export class AdlDateComponent {
 		this.inputYear.value = clickYear;
 		
 		disableInputs(this.cmptEl, this.year, this.month, this.day);
+		clearOnValidate(this.cmptEl, this.year, this.month, this.day);
 		this.inputMonth.focus();
 
 		if(validateDate(this.year,this.month,this.date)){
 			let date = `${this.year}-${this.month}-${this.day}`;
 			let odate = moment(date);
-			console.log(odate.format(this.format));
+			this.value = odate.format(this.format);
+		} else {
+			this.value = null;
+		}
+	}
+
+	onMonthClick(clickMonth: number){
+		this.inputYear = this.cmptEl.shadowRoot.querySelector('[dtType="year"]');
+		this.inputMonth = this.cmptEl.shadowRoot.querySelector('[dtType="month"]');
+		this.inputDay = this.cmptEl.shadowRoot.querySelector('[dtType="day"]');
+		this.month = clickMonth.key;
+		this.inputMonth.value = clickMonth.key;
+		
+		disableInputs(this.cmptEl, this.year, this.month, this.day);
+		this.inputDay.focus();
+
+		if(validateDate(this.year,this.month,this.day)){
+			let date = `${this.year}-${this.month}-${this.day}`;
+			let odate = moment(date);
+			this.value = odate.format(this.format);
+		} else {
+			this.value = null;
+		}
+	}
+
+	onDayClick(clickDay: number){
+		this.inputYear = this.cmptEl.shadowRoot.querySelector('[dtType="year"]');
+		this.inputMonth = this.cmptEl.shadowRoot.querySelector('[dtType="month"]');
+		this.inputDay = this.cmptEl.shadowRoot.querySelector('[dtType="day"]');
+		this.day = clickDay;
+		this.inputDay.value = clickDay;
+		
+		disableInputs(this.cmptEl, this.year, this.month, this.day);
+		this.inputDay.focus();
+
+		if(validateDate(this.year,this.month,this.day)){
+			let date = `${this.year}-${this.month}-${this.day}`;
+			let odate = moment(date);
+			this.value = odate.format(this.format);
+		} else {
+			this.value = null;
 		}
 	}
 
 	showPopup(evt: Event, dtType: number){
 		let popup = this.cmptEl.shadowRoot.querySelector('.popup-container');
+		let popupTitle = this.cmptEl.shadowRoot.querySelector('.grid-title');
 		let popupYear = this.cmptEl.shadowRoot.querySelector('.years-columns');
 		let popupMonth = this.cmptEl.shadowRoot.querySelector('.months-columns');
 		let popupDay = this.cmptEl.shadowRoot.querySelector('.days-columns');
 		let popups = [popupYear, popupMonth, popupDay];
-		let title = getPopupDate(dtType);
 
+		popupTitle.textContent = getPopupDate(dtType)
 		togglePopups(popups, dtType);
 
+		popup.classList.remove('show-popup');
+		this.setYears();
+    this.setDays();
+		console.log('on render');
+		this.render();
+		this.cmptEl.forceUpdate();
 		popup.classList.add('show-popup');
 	}
 
-  renderList(item, customClass) {
+  renderYearsList(item, customClass) {
     return (
-      <div onClick={() => this.onYearClick(item)} class={"grid-item" + (customClass)}>
+      <div onClick={() => this.onYearClick(item)} class="grid-item year-item">
+        <span>{item}</span>
+      </div>
+    );
+  }
+
+	renderMonthsList(item, customClass) {
+    return (
+      <div onClick={() => this.onMonthClick(item)} class="grid-item month-item">
+        <span>{item.value}</span>
+      </div>
+    );
+  }
+
+	renderDaysList(item, customClass) {
+    return (
+      <div onClick={() => this.onDayClick(item)} class="grid-item day-item">
         <span>{item}</span>
       </div>
     );
@@ -185,7 +274,7 @@ export class AdlDateComponent {
             <div class="grid-container days-columns">
               {
                 this.daysList.map(item => {
-                  return this.renderList(item, ' year-item');
+                  return this.renderDaysList(item);
                 })
               }
             </div>
@@ -193,7 +282,7 @@ export class AdlDateComponent {
 						<div class="grid-container months-columns">
               {
                 this.monthsList.map(item => {
-                  return this.renderList(item, ' month-item');
+                  return this.renderMonthsList(item);
                 })
               }
             </div>
@@ -201,7 +290,7 @@ export class AdlDateComponent {
 						<div class="grid-container years-columns">
               {
                 this.yearsList.map(item => {
-                  return this.renderList(item, ' year-item');
+                  return this.renderYearsList(item);
                 })
               }
             </div>

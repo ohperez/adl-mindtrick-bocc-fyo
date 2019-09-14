@@ -25,6 +25,11 @@ export function validateDay(year,month,day): boolean {
 	return validateDate(year,month,day);
 }
 
+export function validateDate(year,month,day){
+	let date = `${year}-${month}-${day}`;
+	return moment(date).isValid();
+}
+
 export function disableInputs(cmptEl: HTMLElement, year: string,month: string, day: string) {
 	let inputDay = cmptEl.shadowRoot.querySelector('[dtType="day"]');
 	let inputMoth = cmptEl.shadowRoot.querySelector('[dtType="month"]');
@@ -86,11 +91,6 @@ export function setValueFromEvt(el, dtType, year, month, day){
 	}
 
 	return { year: year, month: month, day: day }
-}
-
-export function validateDate(year,month,day){
-	let date = `${year}-${month}-${day}`;
-	return moment(date).isValid();
 }
 
 export function getPopupDate(dtType: number): string{
