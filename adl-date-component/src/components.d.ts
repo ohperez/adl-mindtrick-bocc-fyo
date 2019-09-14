@@ -31,6 +31,7 @@ declare global {
 declare namespace LocalJSX {
   interface AdlDateComponent extends JSXBase.HTMLAttributes<HTMLAdlDateComponentElement> {
     'format'?: string;
+    'onChangeDate'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
 

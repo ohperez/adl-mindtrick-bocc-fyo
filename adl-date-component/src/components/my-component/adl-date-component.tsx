@@ -21,6 +21,14 @@ export class AdlDateComponent {
 
   @Prop({ reflect: true }) value: string;
   @Prop() format: string;
+
+	@Event() changeDate: EventEmitter;
+
+	changeDatedHandler(date) {
+    this.changeDate.emit(date);
+  }
+
+
   private year: number;
 
   private month: number;
@@ -103,7 +111,8 @@ export class AdlDateComponent {
 		if(validateDate(this.year,this.month,this.date)){
 			let date = `${this.year}-${this.month}-${this.day}`;
 			let odate = moment(date);
-			console.log(odate.format(this.format));
+			this.value = odate.format(this.format);
+			this.changeDatedHandler(this.value);
 		}
 	}
 
@@ -145,6 +154,8 @@ export class AdlDateComponent {
 		} else {
 			this.value = null;
 		}
+
+		this.changeDatedHandler(this.value);
 	}
 
 	onMonthClick(clickMonth: number){
@@ -164,6 +175,8 @@ export class AdlDateComponent {
 		} else {
 			this.value = null;
 		}
+
+		this.changeDatedHandler(this.value);
 	}
 
 	onDayClick(clickDay: number){
@@ -183,6 +196,8 @@ export class AdlDateComponent {
 		} else {
 			this.value = null;
 		}
+
+		this.changeDatedHandler(this.value);
 	}
 
 	showPopup(evt: Event, dtType: number){
