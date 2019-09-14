@@ -109,15 +109,15 @@ input:focus {
 }
 
 .year-item {
-  height: 30px;
+  height: 40px;
 }
 
 .month-item {
-  height: auto;
+  height: 30px;
 }
 
 .day-item {
-  height: auto;
+  height: 30px;
 }
 
 .day-header{
