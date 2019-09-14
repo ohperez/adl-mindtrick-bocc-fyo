@@ -222,7 +222,7 @@ export class AdlDateComponent {
 
   renderYearsList(item) {
     return (
-      <div onClick={() => this.onYearClick(item)} class="grid-item year-item">
+      <div aria-label={item} onClick={() => this.onYearClick(item)} class="grid-item year-item">
         <span>{item}</span>
       </div>
     );
@@ -230,7 +230,7 @@ export class AdlDateComponent {
 
 	renderMonthsList(item) {
     return (
-      <div onClick={() => this.onMonthClick(item)} class="grid-item month-item">
+      <div aria-label={item.value} onClick={() => this.onMonthClick(item)} class="grid-item month-item">
         <span>{item.value}</span>
       </div>
     );
@@ -238,7 +238,7 @@ export class AdlDateComponent {
 
 	renderDaysList(item) {
     return (
-      <div onClick={() => this.onDayClick(item)} class="grid-item day-item">
+      <div aria-label={item} onClick={() => this.onDayClick(item)} class="grid-item day-item">
         <span>{item}</span>
       </div>
     );
@@ -246,7 +246,7 @@ export class AdlDateComponent {
 
 	renderDaysHeaders(item) {
     return (
-      <div class="grid-item day-header">
+      <div aria-label={item} class="grid-item day-header">
         <span>{item}</span>
       </div>
     );
@@ -266,7 +266,7 @@ export class AdlDateComponent {
 						onfocus={($evt) => this.showPopup($evt,3)}
 						maxlength="4"
             dtType="year"
-            placeholder="1998"
+            placeholder="Año"
 					/>
           <span class="field-separator">/</span>
 
@@ -277,7 +277,7 @@ export class AdlDateComponent {
 						onfocus={($evt) => this.showPopup($evt,2)}
 						dtType="month"
             maxlength="2"
-            placeholder="03"
+            placeholder="Mes"
 						disabled
 					/>
 
@@ -290,7 +290,7 @@ export class AdlDateComponent {
 						onfocus={($evt) => this.showPopup($evt,1)}
 						dtType="day"
             maxlength="2"
-            placeholder="16"
+            placeholder="Día"
 						disabled
 					/>
         </div>
