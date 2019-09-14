@@ -7,5 +7,14 @@
   --input-container-padding: 5px;
   --calendar-font-size: 1rem;
   --calendar-font-color: #022047;
-  --quantity-year-columns: 8;
+  --quantity-year-columns: 4;
+
+
+  --grid-breakpoints-sm: 560px;
+  --grid-breakpoints-md: 768px;
+  --grid-breakpoints-lg: 992px;
+  --grid-breakpoints-xl: 1200px;
+  --grid-breakpoints-xxl: 1600px;
+
+  --font-family: 'sans-serif';
 }
