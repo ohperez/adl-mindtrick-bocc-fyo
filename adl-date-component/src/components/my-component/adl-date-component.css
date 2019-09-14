@@ -109,22 +109,23 @@ input:focus {
 }
 
 .year-item {
-  height: 30px;
+  height: 40px;
 }
 
 .month-item {
-  height: auto;
+  height: 30px;
 }
 
 .day-item {
-  height: auto;
+  height: 30px;
 }
 
 .day-header{
   font-weight: bold;
-  font-size: calc(var(--calendar-font-size) - 0.125rem);
+  font-size: calc(var(--calendar-font-size) - 0.25rem);
   pointer-events: none;
   padding-bottom: 10px;
+  color: var(--primary-color);
 }
 
 input:disabled {
