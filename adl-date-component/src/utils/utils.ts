@@ -31,34 +31,34 @@ export function validateDate(year,month,day){
 }
 
 export function disableInputs(cmptEl: HTMLElement, year: string,month: string, day: string) {
-	let inputDay = cmptEl.shadowRoot.querySelector('[dtType="day"]');
-	let inputMoth = cmptEl.shadowRoot.querySelector('[dtType="month"]');
-	let inputYear = cmptEl.shadowRoot.querySelector('[dtType="year"]');
+	let inputDay = cmptEl.querySelector('[data-type="day"]');
+	let inputMoth = cmptEl.querySelector('[data-type="month"]');
+	let inputYear = cmptEl.querySelector('[data-type="year"]');
 
 	if(year && !month && !day){
-		inputMoth.disabled = false;
-		inputDay.disabled = true;
+		(inputMoth as any).disabled = false;
+		(inputDay as any).disabled = true;
 		return;
 	} else if(year && month && !day){
-		inputDay.disabled = false;
+		(inputDay as any).disabled = false;
 	} else if(year && month && day){
-		inputYear.disabled = false;
-		inputMoth.disabled = false;
-		inputDay.disabled = false;
+		(inputYear as any).disabled = false;
+		(inputMoth as any).disabled = false;
+		(inputDay as any).disabled = false;
 	}
 }
 
 export function clearOnValidate(cmptEl: HTMLElement, year: string,month: string, day: string) {
 	let inputs = [];
-	inputs[0] = cmptEl.shadowRoot.querySelector('[dtType="year"]');
-	inputs[1] = cmptEl.shadowRoot.querySelector('[dtType="month"]');
-	inputs[2] = cmptEl.shadowRoot.querySelector('[dtType="day"]');
+	inputs[0] = cmptEl.querySelector('[data-type="year"]');
+	inputs[1] = cmptEl.querySelector('[data-type="month"]');
+	inputs[2] = cmptEl.querySelector('[data-type="day"]');
 
-	if(month < 10 && month > 0) {
+	if(parseInt(month) < 10 && parseInt(month) > 0) {
 		month = '0' + month;
 	}
 
-	if(day < 10 && day > 0) {
+	if(parseInt(day) < 10 && parseInt(day) > 0) {
 		day = '0' + day;
 	}
 
@@ -104,7 +104,7 @@ export function getPopupDate(dtType: number): string{
 	}
 }
 
-export function togglePopups(popups, dtType: number): string{
+export function togglePopups(popups, dtType: number): void{
 	let showClass = 'show-calendar';
 
 	if(dtType === 3){
